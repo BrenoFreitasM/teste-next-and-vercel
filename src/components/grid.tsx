@@ -8,7 +8,7 @@ interface GridContainerProps {
 }
 
 export function GridContainer({ children, className }: GridContainerProps) {
-  const defaultClass = "w-full mx-w-grid mx-auto px-3"
+  const defaultClass = " mx-w-grid mx-auto px-3"
   const combinedClasses = twMerge(defaultClass, className)
   return(
     <div className={combinedClasses}> 
