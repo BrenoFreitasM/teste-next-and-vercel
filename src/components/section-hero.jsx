@@ -1,4 +1,9 @@
+'use client'
+
+import { useEffect, useRef } from "react";
 import { GridContainer } from "./grid";
+import gsap from "gsap";
+
 import Image from "next/image";
 
 import IconFile from "/public/icon-file.svg"
@@ -7,10 +12,46 @@ import IconHand02 from "/public/icon-hand-02.svg"
 import IconMockup from "/public/mockup.svg"
 
 export function SectionHero() {
+
+  const textHeroREF = useRef(null);
+  const mockupLeftRef = useRef(null);
+  const mockupRightRef = useRef(null);
+
+  useEffect(() => {
+    // console.log(textHeroREF.current); Acessando o elemento 
+    const textHero = textHeroREF.current;
+    const mockupLeft = mockupLeftRef.current;
+    const mockupRight = mockupRightRef.current;
+
+    gsap.fromTo(textHero, {
+      opacity: 0,
+      y: 20
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: 'power4.out'
+    });
+
+    gsap.fromTo(mockupLeft, {
+      rotate: 0
+    }, {
+      rotate: -10,
+      duration: 1
+    })
+
+    gsap.fromTo(mockupRight, {
+      rotate: 0
+    }, {
+      rotate: 10,
+      duration: 1
+    })
+  }, [])
+  
   return(
     <section className="relative w-full h-section-hero bg-green-primary border-t bg-hero border-t-green-border pt-16 overflow-hidden bg-no-repeat bg-top">
       <GridContainer className="flex flex-col items-center">
-        <div className="w-full max-w-text-hero text-center">
+        <div className="w-full max-w-text-hero text-center opacity-0" ref={textHeroREF}>
           <h3 className="text-xl font-medium text-green-actived mb-4">Novo curso focado em instragram</h3>
           <h1 className="text-white text-7xl/normal font-semibold mb-2">Destrave as suas habilidades</h1>
           <div className="flex items-center justify-center gap-10 ">
@@ -28,8 +69,8 @@ export function SectionHero() {
           <Image src={IconHand02} alt="Icon Hand" className="absolute top-0 right-0"/>
         </div>
         <div className="absolute -bottom-44 w-full max-w-area-mockups flex justify-between">
-          <Image src={IconMockup} alt="Mockup" className="relative -rotate-12 top-[1.1rem] left-[3.3rem]"/>
-          <Image src={IconMockup} alt="Mockup" className="relative rotate-12 top-[1.1rem] right-[3.3rem]"/>
+          <Image src={IconMockup} alt="Mockup"  ref={mockupLeftRef} className="relative  top-[1.1rem] left-[3.3rem]"/>
+          <Image src={IconMockup} alt="Mockup"  ref={mockupRightRef} className="relative top-[1.1rem] right-[3.3rem]"/>
         </div>
       </GridContainer>
     </section>
