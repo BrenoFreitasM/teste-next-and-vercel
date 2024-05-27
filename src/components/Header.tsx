@@ -19,7 +19,7 @@ export function Header() {
   return (
     <header className="relative w-full h-24 bg-green-primary flex items-center">
       <GridContainer className="flex items-center justify-between">
-        <Image
+        <Image 
           src={LogoImg}
           alt={"logo"}
         />
